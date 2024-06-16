@@ -45,6 +45,9 @@ async function createTables() {
 
 async function seedData() {
   try {
+    await pool.query("DELETE FROM invoice_items;");
+    await pool.query("DELETE FROM products;"); 
+    
     const createProductsQuery = `
       INSERT INTO products (name, picture, stock, price)
       VALUES
