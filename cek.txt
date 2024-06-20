@@ -1,0 +1,17 @@
+Pertama saya akan mengirimkan strukturnya dulu seperti ini 
+
+folder controller berisi invoiceController.js dan productController.js
+
+folder Image berisi file 1.png
+
+folder models berisi invoice.js dan product.js
+ 
+folder router berisi routes.js
+
+folder node_modules
+
+lalu di root ada 
+
+db.js
+index.js
+migration.js
