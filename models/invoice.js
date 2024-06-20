@@ -51,6 +51,45 @@ class Invoice {
     const itemsResult= await pool.query("SELECT * FROM invoice_items WHERE invoice_id = $1",[id]);
     return {...invoiceResult.rows[0],items: itemsResult.rows};
   }
+
+  static async getPaginated(page = 1, pageSize = 10) {
+    const offset = (page - 1) * pageSize;
+    const result = await pool.query("SELECT * FROM invoices ORDER BY date DESC LIMIT $1 OFFSET $2", [pageSize, offset]);
+    return result.rows;
+  }
+
+  static async getByDateRange(startDate, endDate) {
+    const result = await pool.query("SELECT * FROM invoices WHERE date BETWEEN $1 AND $2 ORDER BY date DESC", [startDate, endDate]);
+    return result.rows;
+  }
+
+  static async getRevenueByPeriod(period) {
+    let interval;
+    switch (period) {
+      case 'daily':
+        interval = '1 day';
+        break;
+      case 'weekly':
+        interval = '1 week';
+        break;
+      case 'monthly':
+        interval = '1 month';
+        break;
+      default:
+        throw new Error('Invalid period');
+    }
+
+    const query = `
+      SELECT 
+        date_trunc($1, date) AS period,
+        SUM(total_amount) AS revenue
+      FROM invoices
+      GROUP BY period
+      ORDER BY period;
+    `;
+    const result = await pool.query(query, [interval]);
+    return result.rows;
+  }
 }
 
 module.exports = { Invoice };

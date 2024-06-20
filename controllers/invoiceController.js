@@ -54,6 +54,47 @@ class InvoiceController {
       res.status(500).json({ error: 'Internal server error' });
     }
   }
+
+  static async getPaginatedInvoices(req, res) {
+    try {
+      const page = parseInt(req.query.page) || 1;
+      const pageSize = parseInt(req.query.pageSize) || 10;
+      const invoices = await Invoice.getPaginated(page, pageSize);
+      res.status(200).json(invoices);
+    } catch (error) {
+      console.error("Error fetching paginated invoices:", error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  static async getInvoicesByDateRange(req, res) {
+    try {
+      const { start_date, end_date } = req.query;
+      const invoices = await Invoice.getByDateRange(start_date, end_date);
+      res.status(200).json(invoices);
+    } catch (error) {
+      console.error("Error fetching invoices by date range:", error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  static async getRevenueByPeriod(req, res) {
+    try {
+      const { period } = req.query;
+      if (!period) {
+        return res.status(400).json({ error: 'Period is required' });
+      }
+      const revenueData = await Invoice.getRevenueByPeriod(period);
+      res.status(200).json(revenueData);
+    } catch (error) {
+      console.error("Error fetching revenue by period:", error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+
+
+
 }
 
 module.exports = { InvoiceController };

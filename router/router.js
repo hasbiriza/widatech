@@ -13,5 +13,7 @@ router.post('/invoices', InvoiceController.createInvoice);
 router.get('/invoices', InvoiceController.getAllInvoices);
 router.get('/invoices/:id', InvoiceController.getInvoiceById);
 router.get('/invoices/:id/items', InvoiceController.getInvoiceWithItems);
+router.get('/invoices/range', InvoiceController.getInvoicesByDateRange);
+router.get('/revenue', InvoiceController.getRevenueByPeriod);
 
 module.exports = router;

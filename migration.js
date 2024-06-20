@@ -56,16 +56,16 @@ async function seedData() {
     const createProductsQuery = `
       INSERT INTO products (name, price, stock, image)
       VALUES
-      ('Bluetooth speaker', 250000, 100, '/images/1.png'),
-      ('Headphone', 150000, 150, '/images/1.png'),
-      ('Laptop charger', 300000, 80, '/images/1.png'),
-      ('LCD Monitor', 2000000, 50, '/images/1.png'),
-      ('Mouse', 50000, 200, '/images/1.png'),
-      ('Keyboard', 80000, 180, '/images/1.png'),
-      ('Webcam', 400000, 70, '/images/1.png'),
-      ('USB Hub', 100000, 90, '/images/1.png'),
-      ('Printer', 1200000, 40, '/images/1.png'),
-      ('Desk Lamp', 60000, 110, '/images/1.png');
+      ('Bluetooth speaker', 250000, 100, '/images/2.png'),
+      ('Headphone', 150000, 150, '/images/3.jpg'),
+      ('Laptop charger', 300000, 80, '/images/44.jpg'),
+      ('LCD Monitor', 2000000, 50, '/images/55.jpg'),
+      ('Mouse', 50000, 200, '/images/66.jpg'),
+      ('Keyboard', 80000, 180, '/images/77.png'),
+      ('Webcam', 400000, 70, '/images/88.jpeg'),
+      ('USB Hub', 100000, 90, '/images/99.jpeg'),
+      ('Printer', 1200000, 40, '/images/printer.png'),
+      ('Desk Lamp', 60000, 110, '/images/lamp.jpg');
     `;
 
     await pool.query(createProductsQuery);
